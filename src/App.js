@@ -1,40 +1,30 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
+import { ChakraProvider, Box, theme } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import DonatePage from './pages/DonatePage';
+import CongratsPage from './pages/CongratsPage';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <Router>
+        {/* <Header /> */}
+        <Switch>
+          <Box textAlign="center" fontSize="xl">
+            <ColorModeSwitcher justifySelf="flex-end" />
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/donate" component={DonatePage} />
+            <Route exact path="/congrats" component={CongratsPage} />
+          </Box>
+          {/* <Route exact path="/login" component={LogInPage} />
+          <Route exact path="/signup" component={SignUpPage} />
+          <Route exact path="/requests" component={RequestPage} />
+          <Route exact path="/requests/:id" component={DetailPage} />
+          <Route exact path="/donate/:id" component={BankTransfer} /> */}
+        </Switch>
+      </Router>
     </ChakraProvider>
   );
 }
